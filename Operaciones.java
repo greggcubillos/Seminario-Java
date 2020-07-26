@@ -193,7 +193,5 @@ public class Operaciones {
         primerosEmpleados.forEach(empleado -> System.out.println(empleado));
         System.out.println("\n");
     }
-
-
 }
 

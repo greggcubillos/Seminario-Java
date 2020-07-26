@@ -53,7 +53,6 @@ public class Main {
                         opciones.sumarSalarios();
                         break;
                     case 9:
-                       // System.out.println ("Total de nombres que empiezan con A o a");
                         opciones.mostrarEmpleadosA();
                         break;
                     case 10:
@@ -72,11 +71,6 @@ public class Main {
                 System.out.println ("Por favor verificar si ha ingresado un valor numerico");
                 in.next();
             }
-
         }
-
-
-
     }
-
 }

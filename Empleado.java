@@ -43,12 +43,9 @@ public class Empleado {
     public void setSalario(Integer salario) {
         this.salario = salario;
     }
-
-
+    
     @Override
     public String toString(){
         return "id:" + getId() + " nombre:" + getNombre() + " apellido:" + getApellido() + " salario:" + getSalario();
     }
-
-
 }
