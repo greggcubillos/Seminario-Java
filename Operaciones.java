@@ -1,17 +1,15 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
-import javax.swing.*;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class Operaciones {
 
     List<Empleado> listaEmpleados = new ArrayList<>();
-    Integer id;
-    String nombre;
-    String apellido;
-    Integer salario;
+   private Integer id;
+   private String nombre;
+   private String apellido;
+   private Integer salario;
 
 
     public Operaciones(){
@@ -26,7 +24,7 @@ public class Operaciones {
 
         Scanner entrada = new Scanner(System.in);
 
-        System.out.println("AÑADIR USUARIO");
+        System.out.println("\nAÑADIR USUARIO");
         System.out.println("Ingrese ID: ");
         id = entrada.nextInt();
 
@@ -107,7 +105,7 @@ public class Operaciones {
     }
 
     public void eliminar(){
-
+        System.out.println ("Eliminar Empleado.\n");
         Scanner entrada = new Scanner(System.in);
         System.out.println("Ingrese ID del empleado a eliminar: ");
         Integer id = entrada.nextInt();
@@ -125,16 +123,77 @@ public class Operaciones {
         }
 
         if (!flag) {
-            System.err.println("El ID que ingreso no existe.");
-
+            System.err.println("El ID que ingreso no existe.\n");
         }
 
 
     }
 
-    public void mostrar(){
+    public void mostrarLista(){
+        System.out.println ("Lista de empleados:\n");
         listaEmpleados.stream().forEach(empleado -> System.out.println(empleado + "\n"));
 
     }
+
+    public void encontrarMayorSalario() {
+        System.out.println ("Empleado con mayor salario: \n");
+        System.out.println(listaEmpleados.stream()
+                .max(Comparator.comparing(Empleado::getSalario))
+                .map(Empleado::toString)
+                .orElse("No hay empleados para listar"));
+        System.out.println("\n");
+    }
+
+    public void encontrarMenorSalario() {
+        System.out.println ("Empleado con menor salario: \n");
+        System.out.println(listaEmpleados.stream()
+                .min(Comparator.comparing(Empleado::getSalario))
+                .map(Empleado::toString)
+                .orElse("No hay empleados para listar"));
+        System.out.println("\n");
+    }
+
+
+    public void ordenarEmpleados() {
+        System.out.println ("Empleados ordenados por nombre: \n");
+        List<Empleado> ordenEmpleados = listaEmpleados.stream()
+                .sorted(Comparator.comparing(Empleado::getNombre))
+                .collect(Collectors.toList());
+        ordenEmpleados.forEach(empleado -> System.out.println(empleado));
+        System.out.println("\n");
+    }
+
+    public void sumarSalarios() {
+        System.out.println ("El total de la suma de sueldos mayores a 700000 es: \n");
+        Integer sumaSalarios = listaEmpleados.stream()
+                .filter(empleado -> empleado.getSalario() > 700000)
+                .map(Empleado::getSalario)
+                .reduce(0, (acc, salario) -> acc + salario);
+        System.out.println(sumaSalarios);
+        System.out.println("\n");
+    }
+
+    private Stream<Empleado> filtrarEmpleadosA() {
+        return listaEmpleados.stream()
+                .filter(empleado -> empleado.getApellido().toUpperCase().startsWith("A"));
+    }
+
+    public void mostrarEmpleadosA() {
+        System.out.print("Número de empleados que su apellido empieza con la letra \"A\" o \"a\" : " + filtrarEmpleadosA().count() + "\n");
+        System.out.println("\n");
+    }
+
+
+    public void primerosCincoEmpleados() {
+        System.out.println ("\nlos empleados con mayor salario son: \n");
+        List<Empleado> primerosEmpleados = listaEmpleados.stream()
+                .sorted(Comparator.comparing(Empleado::getSalario, Comparator.reverseOrder()))
+                .limit(5)
+                .collect(Collectors.toList());
+        primerosEmpleados.forEach(empleado -> System.out.println(empleado));
+        System.out.println("\n");
+    }
+
+
 }
 
