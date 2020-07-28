@@ -33,9 +33,7 @@ public class Operaciones {
             if (it.next().getId().equals(id)) {
                 flag = true;
                 System.err.println("El ID ya existe, por favor realice nuevamente el proceso");
-
             }
-
         }
 
         if (!flag) {
@@ -47,12 +45,10 @@ public class Operaciones {
             salario = entrada.nextInt();
             System.out.println("El Empleado se ha añadido correctamente.\n");
 
-            listaEmpleados.add(new Empleado(id, nombre, apellido, salario));
+            listaEmpleados.add(new Empleado(id, nombre .toUpperCase(), apellido .toUpperCase(), salario));
 
         }
-
-
-
+        
     }
 
     public void actualizar(){
@@ -86,8 +82,8 @@ public class Operaciones {
                 Integer finalSalario = salario;
                 listaEmpleados.stream().filter(empleado -> empleado.getId().equals(ida)).forEach(empleado -> {
                     empleado.setId(id);
-                    empleado.setNombre(nombre);
-                    empleado.setApellido(apellido);
+                    empleado.setNombre(nombre .toUpperCase());
+                    empleado.setApellido(apellido .toUpperCase());
                     empleado.setSalario(salario);
                     System.out.println("Datos de empleado se han actualizados correctamente.\n");
                     System.out.println(empleado + "\n");
@@ -131,8 +127,7 @@ public class Operaciones {
 
     public void mostrarLista(){
         System.out.println ("Lista de empleados:\n");
-        listaEmpleados.stream().forEach(empleado -> System.out.println(empleado + "\n"));
-
+        listaEmpleados.stream().forEach(empleado -> System.out.println(empleado));
     }
 
     public void encontrarMayorSalario() {
@@ -154,10 +149,11 @@ public class Operaciones {
     }
 
     public void ordenarEmpleados() {
-        System.out.println ("Empleados ordenados por nombre: \n");
+       System.out.println ("Empleados ordenados por nombre: \n");
        listaEmpleados.stream()
                .sorted(Comparator.comparing(Empleado::getNombre))
                .forEach(System.out::println);
+       System.out.println("\n");
     }
 
     public void sumarSalarios() {
@@ -191,4 +187,3 @@ public class Operaciones {
         System.out.println("\n");
     }
 }
-
