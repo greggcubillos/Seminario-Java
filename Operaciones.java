@@ -153,14 +153,11 @@ public class Operaciones {
         System.out.println("\n");
     }
 
-
     public void ordenarEmpleados() {
         System.out.println ("Empleados ordenados por nombre: \n");
-        List<Empleado> ordenEmpleados = listaEmpleados.stream()
-                .sorted(Comparator.comparing(Empleado::getNombre))
-                .collect(Collectors.toList());
-        ordenEmpleados.forEach(empleado -> System.out.println(empleado));
-        System.out.println("\n");
+       listaEmpleados.stream()
+               .sorted(Comparator.comparing(Empleado::getNombre))
+               .forEach(System.out::println);
     }
 
     public void sumarSalarios() {
